@@ -15,7 +15,7 @@ public class ResultXMLSet {
 	private Element rootNode;
 	private List<Element> mainChild;
 	private boolean firstRun = true;
-
+//commit
 	public ResultXMLSet(Element rootNode, List<Element> mainChild) {
 		this.rootNode = rootNode;
 		this.mainChild = mainChild;
