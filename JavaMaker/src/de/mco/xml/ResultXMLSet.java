@@ -20,34 +20,38 @@ public class ResultXMLSet {
 		this.rootNode = rootNode;
 		this.mainChild = mainChild;
 	}
-	public int getInt(String label) {
+	public int getInt(String label){
+		System.out.println(cursor);
 		return Integer.parseInt(mainChild.get(cursor).getChildText(label));
 	}
-	public String getString(String label) {
+	public String getString(String label){
 		return mainChild.get(cursor).getChildText(label);
 	}
 	public long getLong(String label) {
 		return Long.parseLong(mainChild.get(cursor).getChildText(label));
 	}
-	public boolean getBool(String label) {
+	public boolean getBool(String label){
 		return Boolean.parseBoolean(mainChild.get(cursor).getChildText(label));
 	}
 	public boolean next() {
+		System.out.println("run "+cursor);
 		if (firstRun == true) {
+
 			firstRun = false;
 			return true;
 		} else {
-			if (cursor == 0 && mainChild.iterator().hasNext()) {
+			if (cursor == 0 && mainChild.listIterator(cursor+1).hasNext()) {
 				cursor++;
 				return true;
 			}
-			if (mainChild.iterator().hasNext()
+			if (mainChild.listIterator(cursor+1).hasNext()
 					&& cursor < (mainChild.size() - 1)) {
 				cursor++;
 				return true;
-			} else
+			} else{
 				firstRun = true;
 			return false;
+			}
 		}
 
 	}

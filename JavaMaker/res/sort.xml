@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Sorts>
+  <Sort>
+    <ID>0</ID>
+    <Name>Name</Name>
+  </Sort>
+  <Sort>
+    <ID>1</ID>
+    <Name>Name</Name>
+  </Sort>
+  <Sort>
+    <ID>2</ID>
+    <Name>Name</Name>
+  </Sort>
+  <Sort>
+    <ID>3</ID>
+    <Name>Name</Name>
+  </Sort>
+  <Sort>
+    <ID>4</ID>
+    <Name>Name</Name>
+  </Sort>
+  <Sort>
+    <ID>5</ID>
+    <Name>Name</Name>
+  </Sort>
+  <Sort>
+    <ID>6</ID>
+    <Name>Name</Name>
+  </Sort>
+  <Sort>
+    <ID>7</ID>
+    <Name>Name</Name>
+  </Sort>
+</Sorts>

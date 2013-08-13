@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Skills>
+<Skill>
+    <ID>0</ID>
+    <Name>Test</Name>
+    <Skills>
+	<Skill>
+        <ID>0</ID>
+		<Level>2</Level>
+	</Skill>
+	        </Skills>
+</Skill>
+</Skills>

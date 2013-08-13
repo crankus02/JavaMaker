@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Skills>
+  <Skill>
+    <ClassID>0</ClassID>
+    <SkillID>0</SkillID>
+    <Level>1</Level>
+  </Skill>
+  <Skill>
+    <ClassID>0</ClassID>
+    <SkillID>0</SkillID>
+    <Level>1</Level>
+  </Skill>
+  <Skill>
+    <ClassID>0</ClassID>
+    <SkillID>0</SkillID>
+    <Level>1</Level>
+  </Skill>
+  <Skill>
+    <ClassID>0</ClassID>
+    <SkillID>0</SkillID>
+    <Level>1</Level>
+  </Skill>
+  <Skill>
+    <ClassID>0</ClassID>
+    <SkillID>0</SkillID>
+    <Level>1</Level>
+  </Skill>
+  <Skill>
+    <ClassID>0</ClassID>
+    <SkillID>2</SkillID>
+    <Level>1</Level>
+  </Skill>
+  <Skill>
+    <ClassID>0</ClassID>
+    <SkillID>2</SkillID>
+    <Level>1</Level>
+  </Skill>
+  <Skill>
+    <ClassID>0</ClassID>
+    <SkillID>2</SkillID>
+    <Level>1</Level>
+  </Skill>
+</Skills>
