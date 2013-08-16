@@ -25,7 +25,7 @@ public class Sort {
 	private static String sortSkillXMLPath = "./res/sortskill.xml";
 	private static ResultXMLSet xmlSet = null;
 	private static XMLTemplate sortTemplate = new XMLTemplate();
-	private static String dataTyp[] = new String[]{"ID", "Name","WeaponTyp"};
+	private static String dataTyp[] = new String[]{"ID", "Name", "WeaponTyp"};
 	private static String skillDataTyp[] = new String[]{"ClassID", "SkillID",
 			"Level"};
 	private List<WeaponTyp> weaponTyp = null;
@@ -55,7 +55,6 @@ public class Sort {
 		return sortTemplate.getManyObjects(xmlSet, new SkillLevelPairMapper());
 	}
 
-
 	public static List<Sort> getAllSort() {
 		Document doc = XMLFileHandler.getXMLDoc(sortXMLPath);
 		Element rootElement = doc.getRootElement();
@@ -64,19 +63,23 @@ public class Sort {
 		return sortTemplate.getManyObjects(xmlSet, new SortMapper());
 
 	}
-	public String saveWeaponTyp(){
+	public String saveWeaponTyp() {
 		String temp = "";
-		for(int i = 0;i<this.weaponTyp.size();i++){
-			if(temp.length()==0)
-				temp+=weaponTyp.toString();
+		for (int i = 0; i < this.weaponTyp.size(); i++) {
+			if (temp.length() == 0)
+				temp += weaponTyp.toString();
 			else
-				temp+="/"+weaponTyp.toString();
+				temp += "/" + weaponTyp.toString();
 		}
 		return temp;
 	}
+	public static String[] getSortDataValue(Sort a) {
+		return new String[]{String.valueOf(Sort.getLastId()), a.getName(),
+				a.saveWeaponTyp()};
+	}
 	public static void saveSort(Sort a) {
 		sortTemplate.newXMLObject("Sort", dataTyp,
-				new String[]{String.valueOf(Sort.getLastId()), a.getName(),a.saveWeaponTyp()},
+				getSortDataValue(a),
 				sortXMLPath, XMLFileHandler.getXMLDoc(sortXMLPath));
 		for (int i = 0; i < a.getSkillsToLearn().size(); i++) {
 			sortTemplate
@@ -96,19 +99,22 @@ public class Sort {
 		s.setId(0);
 		s.setName("Name");
 		SkillLevelPair t = new SkillLevelPair();
-		t.skillId= 2;
-		t.skillLevel= 1;
-		List <SkillLevelPair> g = new ArrayList<SkillLevelPair>();
+		t.skillId = 2;
+		t.skillLevel = 1;
+		List<SkillLevelPair> g = new ArrayList<SkillLevelPair>();
 		g.add(t);
 		s.setSkillsToLearn(g);
 		Sort.saveSort(s);
 		Sort l = Sort.getSortById(0);
-		System.out.println("Skill id: "+l.getSkillsToLearn().get(5).skillId);
+		System.out.println("Skill id: " + l.getSkillsToLearn().get(5).skillId);
 	}
 	public static void updateSort(Sort a) {
-		sortTemplate.updateXMLObject("ID", String.valueOf(a.getId()), dataTyp,
-				new String[]{String.valueOf(a.getId()), a.getName(),a.saveWeaponTyp()},
-				sortXMLPath, XMLFileHandler.getXMLDoc(sortXMLPath));
+		sortTemplate.updateXMLObject(
+				"ID",
+				String.valueOf(a.getId()),
+				dataTyp,
+				getSortDataValue(a), sortXMLPath,
+				XMLFileHandler.getXMLDoc(sortXMLPath));
 
 	}
 	public static void updateSortSkill(Sort a) {
@@ -135,8 +141,8 @@ public class Sort {
 	}
 
 	public static int getLastId() {
-			List<Sort> list = Sort.getAllSort();
-			return list.get(list.size() - 1).getId() + 1;
+		List<Sort> list = Sort.getAllSort();
+		return list.get(list.size() - 1).getId() + 1;
 	}
 
 	public int getId() {
@@ -168,20 +174,22 @@ public class Sort {
 		}
 
 	}
-	public void fillWeaponTyp(String s){
-		String temp [] = s.split("/");
-		for(int i = 0;i<temp.length;i++){
+	public void fillWeaponTyp(String s) {
+		String temp[] = s.split("/");
+		for (int i = 0; i < temp.length; i++) {
 			this.weaponTyp.add(WeaponTyp.valueOf(temp[i]));
 		}
 	}
 
-	private static final class SkillLevelPairMapper implements XMLMapper<SkillLevelPair> {
+	private static final class SkillLevelPairMapper
+			implements
+				XMLMapper<SkillLevelPair> {
 
 		@Override
 		public SkillLevelPair mapXML(ResultXMLSet xmlSet) {
 			SkillLevelPair a = new SkillLevelPair();
-			a.skillId=xmlSet.getInt("SkillID");
-			a.skillLevel=xmlSet.getInt("Level");
+			a.skillId = xmlSet.getInt("SkillID");
+			a.skillLevel = xmlSet.getInt("Level");
 			return a;
 		}
 

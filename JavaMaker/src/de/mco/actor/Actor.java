@@ -18,7 +18,7 @@ import de.mco.xml.XMLTemplate;
  * @Author Marco Hoff
  */
 
-public class Actor implements XMLObject<Actor> {
+public class Actor {
 
 	private int id = 0;
 	private String name = "";
@@ -59,16 +59,21 @@ public class Actor implements XMLObject<Actor> {
 		return actorTemplate.getManyObjects(xmlSet, new ActorMapper());
 
 	}
+	public static String [] getActorDataValue(Actor a){
+		return new String[]{String.valueOf(Actor.getLastId()), a.getName(),
+				String.valueOf(a.getSort().getId()),
+				String.valueOf(a.getStartLevel()),
+				String.valueOf(a.getEndLevel()),
+				String.valueOf(a.getCurrentHP()),
+				String.valueOf(a.getMaxHP())
+		};
+
+	}
 	public static void saveActor(Actor a) {
 		actorTemplate.newXMLObject(
 				"Actor",
 				dataTyp,
-				new String[]{String.valueOf(Actor.getLastId()), a.getName(),
-						String.valueOf(a.getSort().getId()),
-						String.valueOf(a.getStartLevel()),
-						String.valueOf(a.getEndLevel()),
-						String.valueOf(a.getCurrentHP()),
-						String.valueOf(a.getMaxHP())}, actorXMLPath,
+				getActorDataValue(a), actorXMLPath,
 				XMLFileHandler.getXMLDoc(actorXMLPath));
 	}
 	public static void updateActor(Actor a) {
@@ -76,12 +81,7 @@ public class Actor implements XMLObject<Actor> {
 				"ID",
 				String.valueOf(a.getId()),
 				dataTyp,
-				new String[]{String.valueOf(a.getId()), a.getName(),
-						String.valueOf(a.getSort().getId()),
-						String.valueOf(a.getStartLevel()),
-						String.valueOf(a.getEndLevel()),
-						String.valueOf(a.getCurrentHP()),
-						String.valueOf(a.getMaxHP())}, actorXMLPath,
+				getActorDataValue(a), actorXMLPath,
 				XMLFileHandler.getXMLDoc(actorXMLPath));
 
 	}

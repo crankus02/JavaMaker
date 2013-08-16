@@ -1,4 +1,3 @@
-
 package de.mco.skill;
 
 import java.util.ArrayList;
@@ -7,7 +6,6 @@ import java.util.List;
 import org.jdom2.Document;
 import org.jdom2.Element;
 
-
 import de.mco.xml.ResultXMLSet;
 import de.mco.xml.XMLFileHandler;
 import de.mco.xml.XMLMapper;
@@ -15,29 +13,28 @@ import de.mco.xml.XMLTemplate;
 
 /**
  *
- *@Author Marco Hoff
+ * @Author Marco Hoff
  */
 
 public class Skill {
 
 	private int id = 0;
-	private String name ="";
-	private static String skillXMLPath ="./res/skill.xml";
+	private String name = "";
+	private static String skillXMLPath = "./res/skill.xml";
 	private static ResultXMLSet xmlSet = null;
 	private static XMLTemplate skillTemplate = new XMLTemplate();
-	private static String dataTyp[] = new String[]{"ID","Name"};
-
+	private static String dataTyp[] = new String[]{"ID", "Name"};
 
 	public static Skill getSkillById(int id) {
 		Document doc = XMLFileHandler.getXMLDoc(skillXMLPath);
 		Element rootElement = doc.getRootElement();
 		List<Element> mainChild = rootElement.getChildren();
 		for (int i = 0; i < mainChild.size(); i++) {
-			List<Element>tempList = new ArrayList<Element>();
+			List<Element> tempList = new ArrayList<Element>();
 			if (mainChild.get(i).getChildText("ID").equals(String.valueOf(id))) {
 				tempList.add(mainChild.get(i));
-				if(tempList!=null)
-				xmlSet = new ResultXMLSet(rootElement, tempList);
+				if (tempList != null)
+					xmlSet = new ResultXMLSet(rootElement, tempList);
 				return skillTemplate.getOneObject(xmlSet, new SkillMapper());
 			}
 		}
@@ -53,14 +50,17 @@ public class Skill {
 		return skillTemplate.getManyObjects(xmlSet, new SkillMapper());
 
 	}
+	public static String[] getSkillDataValue(Skill a) {
+		return new String[]{String.valueOf(Skill.getLastId()), a.getName()};
+	}
 	public static void saveSkill(Skill a) {
 		skillTemplate.newXMLObject("Skill", dataTyp,
-				new String[]{String.valueOf(Skill.getLastId()), a.getName()},
+				getSkillDataValue(a),
 				skillXMLPath, XMLFileHandler.getXMLDoc(skillXMLPath));
 	}
 	public static void updateSkill(Skill a) {
 		skillTemplate.updateXMLObject("ID", String.valueOf(a.getId()), dataTyp,
-				new String[]{String.valueOf(a.getId()), a.getName()},
+				getSkillDataValue(a),
 				skillXMLPath, XMLFileHandler.getXMLDoc(skillXMLPath));
 
 	}
@@ -68,10 +68,10 @@ public class Skill {
 		skillTemplate.deleteXMLObject("ID", String.valueOf(a.getId()),
 				skillXMLPath, XMLFileHandler.getXMLDoc(skillXMLPath));
 	}
-	public static int getLastId(){
-		List<Skill>list = Skill.getAllSkill();
+	public static int getLastId() {
+		List<Skill> list = Skill.getAllSkill();
 
-		return list.get(list.size()-1).getId()+1;
+		return list.get(list.size() - 1).getId() + 1;
 	}
 	public static void main(String[] args) {
 

@@ -1,4 +1,3 @@
-
 package de.mco.weapon;
 
 import java.util.ArrayList;
@@ -7,7 +6,6 @@ import java.util.List;
 import org.jdom2.Document;
 import org.jdom2.Element;
 
-
 import de.mco.xml.ResultXMLSet;
 import de.mco.xml.XMLFileHandler;
 import de.mco.xml.XMLMapper;
@@ -15,29 +13,28 @@ import de.mco.xml.XMLTemplate;
 
 /**
  *
- *@Author Marco Hoff
+ * @Author Marco Hoff
  */
 
 public class Weapon {
 	private int id = 0;
-	private String name ="";
-	private static String weaponXMLPath ="./res/weapon.xml";
+	private String name = "";
+	private static String weaponXMLPath = "./res/weapon.xml";
 	private static ResultXMLSet xmlSet = null;
 	private static XMLTemplate weaponTemplate = new XMLTemplate();
-	private static String dataTyp[] = new String[]{"ID","Name","WeaponTyp"};
+	private static String dataTyp[] = new String[]{"ID", "Name", "WeaponTyp"};
 	private WeaponTyp weaponTyp = null;
-
 
 	public static Weapon getWeaponById(int id) {
 		Document doc = XMLFileHandler.getXMLDoc(weaponXMLPath);
 		Element rootElement = doc.getRootElement();
 		List<Element> mainChild = rootElement.getChildren();
 		for (int i = 0; i < mainChild.size(); i++) {
-			List<Element>tempList = new ArrayList<Element>();
+			List<Element> tempList = new ArrayList<Element>();
 			if (mainChild.get(i).getChildText("ID").equals(String.valueOf(id))) {
 				tempList.add(mainChild.get(i));
-				if(tempList!=null)
-				xmlSet = new ResultXMLSet(rootElement, tempList);
+				if (tempList != null)
+					xmlSet = new ResultXMLSet(rootElement, tempList);
 				return weaponTemplate.getOneObject(xmlSet, new WeaponMapper());
 			}
 		}
@@ -53,24 +50,27 @@ public class Weapon {
 		return weaponTemplate.getManyObjects(xmlSet, new WeaponMapper());
 
 	}
+	public static String[] getWeaponDataValue(Weapon a) {
+		return new String[]{String.valueOf(Weapon.getLastId()), a.getName(),
+				a.getWeaponTyp().toString()};
+	}
 	public static void saveWeapon(Weapon a) {
-		weaponTemplate.newXMLObject("Weapon", dataTyp,
-				new String[]{String.valueOf(Weapon.getLastId()), a.getName(),a.getWeaponTyp().toString()},
+		weaponTemplate.newXMLObject("Weapon", dataTyp, getWeaponDataValue(a),
 				weaponXMLPath, XMLFileHandler.getXMLDoc(weaponXMLPath));
 	}
 	public static void updateWeapon(Weapon a) {
-		weaponTemplate.updateXMLObject("ID", String.valueOf(a.getId()), dataTyp,
-				new String[]{String.valueOf(a.getId()), a.getName(),a.getWeaponTyp().toString()},
-				weaponXMLPath, XMLFileHandler.getXMLDoc(weaponXMLPath));
+		weaponTemplate.updateXMLObject("ID", String.valueOf(a.getId()),
+				dataTyp, getWeaponDataValue(a), weaponXMLPath,
+				XMLFileHandler.getXMLDoc(weaponXMLPath));
 
 	}
 	public static void deleteWeapon(Weapon a) {
 		weaponTemplate.deleteXMLObject("ID", String.valueOf(a.getId()),
 				weaponXMLPath, XMLFileHandler.getXMLDoc(weaponXMLPath));
 	}
-	public static int getLastId(){
-		List<Weapon>list = Weapon.getAllWeapon();
-		return list.get(list.size()-1).getId()+1;
+	public static int getLastId() {
+		List<Weapon> list = Weapon.getAllWeapon();
+		return list.get(list.size() - 1).getId() + 1;
 	}
 	public static void main(String[] args) {
 
