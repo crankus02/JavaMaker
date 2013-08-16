@@ -6,6 +6,7 @@ import java.util.List;
 import org.jdom2.Document;
 import org.jdom2.Element;
 
+import de.mco.weapon.WeaponTyp;
 import de.mco.xml.ResultXMLSet;
 import de.mco.xml.XMLFileHandler;
 import de.mco.xml.XMLMapper;
@@ -24,16 +25,16 @@ public class Sort {
 	private static String sortSkillXMLPath = "./res/sortskill.xml";
 	private static ResultXMLSet xmlSet = null;
 	private static XMLTemplate sortTemplate = new XMLTemplate();
-	private static String dataTyp[] = new String[]{"ID", "Name"};
+	private static String dataTyp[] = new String[]{"ID", "Name","WeaponTyp"};
 	private static String skillDataTyp[] = new String[]{"ClassID", "SkillID",
 			"Level"};
+	private List<WeaponTyp> weaponTyp = null;
 	private List<SkillLevelPair> skillsToLearn = null;
 
 	public static Sort getSortById(int id) {
 		Document doc = XMLFileHandler.getXMLDoc(sortXMLPath);
 		Element rootElement = doc.getRootElement();
 		List<Element> mainChild = rootElement.getChildren();
-
 		for (int i = 0; i < mainChild.size(); i++) {
 			List<Element> tempList = new ArrayList<Element>();
 			if (mainChild.get(i).getChildText("ID").equals(String.valueOf(id))) {
@@ -41,11 +42,9 @@ public class Sort {
 				if (tempList != null)
 					xmlSet = new ResultXMLSet(rootElement, tempList);
 				return sortTemplate.getOneObject(xmlSet, new SortMapper());
-
 			}
 		}
 		return null;
-
 	}
 
 	public static List<SkillLevelPair> fillSkillList(int id) {
@@ -65,9 +64,19 @@ public class Sort {
 		return sortTemplate.getManyObjects(xmlSet, new SortMapper());
 
 	}
+	public String saveWeaponTyp(){
+		String temp = "";
+		for(int i = 0;i<this.weaponTyp.size();i++){
+			if(temp.length()==0)
+				temp+=weaponTyp.toString();
+			else
+				temp+="/"+weaponTyp.toString();
+		}
+		return temp;
+	}
 	public static void saveSort(Sort a) {
 		sortTemplate.newXMLObject("Sort", dataTyp,
-				new String[]{String.valueOf(Sort.getLastId()), a.getName()},
+				new String[]{String.valueOf(Sort.getLastId()), a.getName(),a.saveWeaponTyp()},
 				sortXMLPath, XMLFileHandler.getXMLDoc(sortXMLPath));
 		for (int i = 0; i < a.getSkillsToLearn().size(); i++) {
 			sortTemplate
@@ -98,7 +107,7 @@ public class Sort {
 	}
 	public static void updateSort(Sort a) {
 		sortTemplate.updateXMLObject("ID", String.valueOf(a.getId()), dataTyp,
-				new String[]{String.valueOf(a.getId()), a.getName()},
+				new String[]{String.valueOf(a.getId()), a.getName(),a.saveWeaponTyp()},
 				sortXMLPath, XMLFileHandler.getXMLDoc(sortXMLPath));
 
 	}
@@ -154,11 +163,17 @@ public class Sort {
 			a.setId(xmlSet.getInt("ID"));
 			a.setName(xmlSet.getString("Name"));
 			a.setSkillsToLearn(Sort.fillSkillList(a.getId()));
+			a.fillWeaponTyp(xmlSet.getString("WeaponTyp"));
 			return a;
 		}
 
 	}
-
+	public void fillWeaponTyp(String s){
+		String temp [] = s.split("/");
+		for(int i = 0;i<temp.length;i++){
+			this.weaponTyp.add(WeaponTyp.valueOf(temp[i]));
+		}
+	}
 
 	private static final class SkillLevelPairMapper implements XMLMapper<SkillLevelPair> {
 
@@ -184,5 +199,13 @@ public class Sort {
 
 	public void setSkillsToLearn(List<SkillLevelPair> list) {
 		this.skillsToLearn = list;
+	}
+
+	public List<WeaponTyp> getWeaponTyp() {
+		return weaponTyp;
+	}
+
+	public void setWeaponTyp(List<WeaponTyp> weaponTyp) {
+		this.weaponTyp = weaponTyp;
 	}
 }
