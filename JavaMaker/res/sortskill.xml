@@ -7,8 +7,8 @@
   </Skill>
   <Skill>
     <ClassID>0</ClassID>
-    <SkillID>0</SkillID>
-    <Level>1</Level>
+    <SkillID>1</SkillID>
+    <Level>5</Level>
   </Skill>
   <Skill>
     <ClassID>0</ClassID>
@@ -17,8 +17,8 @@
   </Skill>
   <Skill>
     <ClassID>0</ClassID>
-    <SkillID>0</SkillID>
-    <Level>1</Level>
+    <SkillID>1</SkillID>
+    <Level>5</Level>
   </Skill>
   <Skill>
     <ClassID>0</ClassID>
@@ -27,17 +27,17 @@
   </Skill>
   <Skill>
     <ClassID>0</ClassID>
-    <SkillID>2</SkillID>
+    <SkillID>1</SkillID>
+    <Level>5</Level>
+  </Skill>
+  <Skill>
+    <ClassID>0</ClassID>
+    <SkillID>0</SkillID>
     <Level>1</Level>
   </Skill>
   <Skill>
     <ClassID>0</ClassID>
-    <SkillID>2</SkillID>
-    <Level>1</Level>
-  </Skill>
-  <Skill>
-    <ClassID>0</ClassID>
-    <SkillID>2</SkillID>
-    <Level>1</Level>
+    <SkillID>1</SkillID>
+    <Level>5</Level>
   </Skill>
 </Skills>

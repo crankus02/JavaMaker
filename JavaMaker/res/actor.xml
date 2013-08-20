@@ -2,10 +2,38 @@
 <Actors>
   <Actor>
     <ID>0</ID>
-    <Name>change</Name>
+    <Name>Marco</Name>
+    <Sort>0</Sort>
+    <StartLevel>1</StartLevel>
+    <EndLevel>99</EndLevel>
+    <CurrentHP>100</CurrentHP>
+    <MaxHP>100</MaxHP>
   </Actor>
   <Actor>
     <ID>1</ID>
-    <Name>IDTEST</Name>
+    <Name>Marco</Name>
+    <Sort>0</Sort>
+    <StartLevel>1</StartLevel>
+    <EndLevel>99</EndLevel>
+    <CurrentHP>100</CurrentHP>
+    <MaxHP>100</MaxHP>
+  </Actor>
+  <Actor>
+    <ID>2</ID>
+    <Name>Marco</Name>
+    <Sort>0</Sort>
+    <StartLevel>1</StartLevel>
+    <EndLevel>99</EndLevel>
+    <CurrentHP>100</CurrentHP>
+    <MaxHP>100</MaxHP>
+  </Actor>
+  <Actor>
+    <ID>3</ID>
+    <Name>Marco</Name>
+    <Sort>0</Sort>
+    <StartLevel>1</StartLevel>
+    <EndLevel>99</EndLevel>
+    <CurrentHP>100</CurrentHP>
+    <MaxHP>100</MaxHP>
   </Actor>
 </Actors>

@@ -1,13 +1,35 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Skills>
-<Skill>
+  <Skill>
     <ID>0</ID>
-    <Name>Test</Name>
-    <Skills>
-	<Skill>
-        <ID>0</ID>
-		<Level>2</Level>
-	</Skill>
-	        </Skills>
-</Skill>
+    <Name>fire</Name>
+  </Skill>
+  <Skill>
+    <ID>1</ID>
+    <Name>light</Name>
+  </Skill>
+  <Skill>
+    <ID>2</ID>
+    <Name>fire</Name>
+  </Skill>
+  <Skill>
+    <ID>3</ID>
+    <Name>light</Name>
+  </Skill>
+  <Skill>
+    <ID>4</ID>
+    <Name>fire</Name>
+  </Skill>
+  <Skill>
+    <ID>5</ID>
+    <Name>light</Name>
+  </Skill>
+  <Skill>
+    <ID>6</ID>
+    <Name>fire</Name>
+  </Skill>
+  <Skill>
+    <ID>7</ID>
+    <Name>light</Name>
+  </Skill>
 </Skills>

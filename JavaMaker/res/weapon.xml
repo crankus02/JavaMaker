@@ -1,5 +1,43 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Weapons>
-
-
+  <Weapon>
+    <ID>0</ID>
+    <Name>Bow</Name>
+    <WeaponTyp>Bow</WeaponTyp>
+  </Weapon>
+  <Weapon>
+    <ID>1</ID>
+    <Name>Sword</Name>
+    <WeaponTyp>Pistol</WeaponTyp>
+  </Weapon>
+  <Weapon>
+    <ID>2</ID>
+    <Name>Bow</Name>
+    <WeaponTyp>Bow</WeaponTyp>
+  </Weapon>
+  <Weapon>
+    <ID>3</ID>
+    <Name>Sword</Name>
+    <WeaponTyp>Pistol</WeaponTyp>
+  </Weapon>
+  <Weapon>
+    <ID>4</ID>
+    <Name>Bow</Name>
+    <WeaponTyp>Bow</WeaponTyp>
+  </Weapon>
+  <Weapon>
+    <ID>5</ID>
+    <Name>Sword</Name>
+    <WeaponTyp>Pistol</WeaponTyp>
+  </Weapon>
+  <Weapon>
+    <ID>6</ID>
+    <Name>Bow</Name>
+    <WeaponTyp>Bow</WeaponTyp>
+  </Weapon>
+  <Weapon>
+    <ID>7</ID>
+    <Name>Sword</Name>
+    <WeaponTyp>Pistol</WeaponTyp>
+  </Weapon>
 </Weapons>

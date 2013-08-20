@@ -6,6 +6,7 @@ import java.util.List;
 import org.jdom2.Document;
 import org.jdom2.Element;
 
+import de.mco.actor.Actor;
 import de.mco.xml.ResultXMLSet;
 import de.mco.xml.XMLFileHandler;
 import de.mco.xml.XMLMapper;
@@ -47,7 +48,10 @@ public class Weapon {
 		Element rootElement = doc.getRootElement();
 		List<Element> mainChild = rootElement.getChildren();
 		xmlSet = new ResultXMLSet(rootElement, mainChild);
+		if(mainChild!=null&&mainChild.size()!=0)
 		return weaponTemplate.getManyObjects(xmlSet, new WeaponMapper());
+		else
+			return null;
 
 	}
 	public static String[] getWeaponDataValue(Weapon a) {
@@ -69,6 +73,9 @@ public class Weapon {
 				weaponXMLPath, XMLFileHandler.getXMLDoc(weaponXMLPath));
 	}
 	public static int getLastId() {
+		if(Weapon.getAllWeapon()==null){
+			return 0;
+		}
 		List<Weapon> list = Weapon.getAllWeapon();
 		return list.get(list.size() - 1).getId() + 1;
 	}

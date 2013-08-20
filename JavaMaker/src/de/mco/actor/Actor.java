@@ -1,8 +1,11 @@
 package de.mco.actor;
 
+import java.awt.Image;
+import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.log4j.Logger;
 import org.jdom2.Document;
 import org.jdom2.Element;
 
@@ -10,7 +13,6 @@ import de.mco.sort.Sort;
 import de.mco.xml.ResultXMLSet;
 import de.mco.xml.XMLFileHandler;
 import de.mco.xml.XMLMapper;
-import de.mco.xml.XMLObject;
 import de.mco.xml.XMLTemplate;
 
 /**
@@ -33,6 +35,12 @@ public class Actor {
 	private static XMLTemplate actorTemplate = new XMLTemplate();
 	private static String dataTyp[] = new String[]{"ID", "Name", "Sort",
 			"StartLevel", "EndLevel", "CurrentHP", "MaxHP"};
+	private BufferedImage charGrafik = null;
+	private BufferedImage faceGrafik = null;
+
+	private static final Logger logger = Logger.getLogger("ActorLogger");
+
+
 
 	public static Actor getActorById(int id) {
 		Document doc = XMLFileHandler.getXMLDoc(actorXMLPath);
@@ -45,18 +53,26 @@ public class Actor {
 				tempList.add(mainChild.get(i));
 				if (tempList != null)
 					xmlSet = new ResultXMLSet(rootElement, tempList);
+				logger.info("Actor has been founded");
 				return actorTemplate.getOneObject(xmlSet, new ActorMapper());
 			}
 		}
+		logger.error("No Actor found, with this ID: "+id);
 		return null;
 	}
 
 	public static List<Actor> getAllActor() {
+
 		Document doc = XMLFileHandler.getXMLDoc(actorXMLPath);
 		Element rootElement = doc.getRootElement();
 		List<Element> mainChild = rootElement.getChildren();
 		xmlSet = new ResultXMLSet(rootElement, mainChild);
-		return actorTemplate.getManyObjects(xmlSet, new ActorMapper());
+		if(mainChild!=null&&mainChild.size()!=0){
+			logger.info("Actor List created");
+		return actorTemplate.getManyObjects(xmlSet, new ActorMapper());}
+		else{
+			logger.info("No Actor in XML");
+			return null;}
 
 	}
 	public static String [] getActorDataValue(Actor a){
@@ -65,7 +81,8 @@ public class Actor {
 				String.valueOf(a.getStartLevel()),
 				String.valueOf(a.getEndLevel()),
 				String.valueOf(a.getCurrentHP()),
-				String.valueOf(a.getMaxHP())
+				String.valueOf(a.getMaxHP()),
+
 		};
 
 	}
@@ -75,6 +92,7 @@ public class Actor {
 				dataTyp,
 				getActorDataValue(a), actorXMLPath,
 				XMLFileHandler.getXMLDoc(actorXMLPath));
+		logger.info("Actor has been saved: "+a.getName()+" : "+a.getId());
 	}
 	public static void updateActor(Actor a) {
 		actorTemplate.updateXMLObject(
@@ -83,15 +101,19 @@ public class Actor {
 				dataTyp,
 				getActorDataValue(a), actorXMLPath,
 				XMLFileHandler.getXMLDoc(actorXMLPath));
-
+		logger.info("Actor has been updated: "+a.getName()+" : "+a.getId());
 	}
 	public static void deleteActor(Actor a) {
 		actorTemplate.deleteXMLObject("ID", String.valueOf(a.getId()),
 				actorXMLPath, XMLFileHandler.getXMLDoc(actorXMLPath));
+		logger.info("Actor has been deleted: "+a.getName()+" : "+a.getId());
 	}
 	public static int getLastId() {
+		if(Actor.getAllActor()==null){
+			return 0;
+		}
 		List<Actor> list = Actor.getAllActor();
-
+		logger.info("Last Actor ID IS: "+list.get(list.size() - 1).getId() + 1);
 		return list.get(list.size() - 1).getId() + 1;
 	}
 	public static void main(String[] args) {
@@ -118,11 +140,16 @@ public class Actor {
 			a.setEndLevel(xmlSet.getInt("EndLevel"));
 			a.setCurrentHP(xmlSet.getInt("CurrentHP"));
 			a.setMaxHP(xmlSet.getInt("MaxHP"));
+			logger.info("Actor successfully mapped");
 			return a;
 		}
 
 	}
 
+	@Override
+	public String toString(){
+		return this.getId()+" : "+this.getName();
+	}
 	public int getId() {
 		return id;
 	}
@@ -177,5 +204,21 @@ public class Actor {
 
 	public void setMaxHP(int maxHP) {
 		this.maxHP = maxHP;
+	}
+
+	public BufferedImage getCharGrafik() {
+		return charGrafik;
+	}
+
+	public void setCharGrafik(BufferedImage charGrafik) {
+		this.charGrafik = charGrafik;
+	}
+
+	public BufferedImage getFaceGrafik() {
+		return faceGrafik;
+	}
+
+	public void setFaceGrafik(BufferedImage faceGrafik) {
+		this.faceGrafik = faceGrafik;
 	}
 }

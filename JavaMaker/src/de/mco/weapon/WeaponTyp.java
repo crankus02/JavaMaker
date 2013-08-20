@@ -11,7 +11,6 @@ OneHandSword,
 TwoHandSword,
 Bow,
 Shield,
-
 Spear,
 Pistol,
 Machinegun

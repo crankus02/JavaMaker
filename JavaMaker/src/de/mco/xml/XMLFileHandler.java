@@ -33,6 +33,9 @@ public abstract class XMLFileHandler {
 		 Document doc = null;
 			try {
 				xmlFile=new File(path);
+				if(!xmlFile.exists()){
+					xmlFile.createNewFile();
+				}
 				doc = (Document) builder.build(xmlFile);
 			} catch (JDOMException | IOException e) {
 				e.printStackTrace();

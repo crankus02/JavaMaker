@@ -2,34 +2,22 @@
 <Sorts>
   <Sort>
     <ID>0</ID>
-    <Name>Name</Name>
+    <Name>Ritter</Name>
+    <WeaponTyp>[Bow, Pistol]</WeaponTyp>
   </Sort>
   <Sort>
     <ID>1</ID>
-    <Name>Name</Name>
+    <Name>Ritter</Name>
+    <WeaponTyp>[Bow, Pistol]</WeaponTyp>
   </Sort>
   <Sort>
     <ID>2</ID>
-    <Name>Name</Name>
+    <Name>Ritter</Name>
+    <WeaponTyp>[Bow, Pistol]</WeaponTyp>
   </Sort>
   <Sort>
     <ID>3</ID>
-    <Name>Name</Name>
-  </Sort>
-  <Sort>
-    <ID>4</ID>
-    <Name>Name</Name>
-  </Sort>
-  <Sort>
-    <ID>5</ID>
-    <Name>Name</Name>
-  </Sort>
-  <Sort>
-    <ID>6</ID>
-    <Name>Name</Name>
-  </Sort>
-  <Sort>
-    <ID>7</ID>
-    <Name>Name</Name>
+    <Name>Ritter</Name>
+    <WeaponTyp>[Bow, Pistol]</WeaponTyp>
   </Sort>
 </Sorts>
